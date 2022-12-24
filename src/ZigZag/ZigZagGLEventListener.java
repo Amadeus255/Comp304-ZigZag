@@ -2,14 +2,20 @@ package ZigZag;
 
 import Texture.TextureReader;
 
-import java.awt.event.*;
+import javax.media.opengl.GL;
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLEventListener;
+import javax.media.opengl.glu.GLU;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
-import javax.media.opengl.*;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Iterator;
 import java.util.Random;
-import javax.media.opengl.glu.GLU;
-import javax.swing.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
@@ -17,7 +23,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     int maxHeight = 1000;
     double x = 0;
     double y = 0;
-    double speed = 3;
+    double speed = 5;
+    double xBall = 0;
+    double yBall = 0;
+
 
     ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -59,6 +68,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
         gl.glLoadIdentity();
         gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
+
+//        createMap();
+
     }
 
     public void display(GLAutoDrawable gld) {
@@ -67,9 +79,33 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         createMap();
         for (Tile tile : tiles) {
-            drawSprite(gl, tile.x, tile.y, 100, 100, 2);
+            drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
             tile.y -= speed;
+            tile.invalidate();
+            System.out.println(tiles.size() + " tiles");
         }
+//        tiles.add(new Tile(x, y, 0));
+//        for  (int i = 0; i < tiles.size(); i++) {
+//            Tile tile = tiles.get(i);
+//            drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
+//            tile.y -= speed;
+//            if (tile.y < -500) {
+//                tiles.remove(tile);
+//                createMap();
+//            }
+//            System.out.println(tiles.size() + " tiles");
+//        }
+
+//        Iterator <Tile> itr = tiles.iterator();
+//        while (itr.hasNext()) {
+//            Tile b = itr.next();
+//            if (b.invisible){
+////                itr.remove();
+//                createMap();
+//            }
+//        }
+
+
         handleKeyPress();
     }
 
@@ -80,37 +116,22 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 
-    public void drawBackground(GL gl) {
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[0]);    // Turn Blending On
-
-        gl.glPushMatrix();
-        gl.glBegin(GL.GL_QUADS);
-
-        Vertex(gl);
-
-        gl.glEnd();
-        gl.glPopMatrix();
-        gl.glDisable(GL.GL_BLEND);
-    }
-
-    public void drawSprite(GL gl, double x, double y, int width, int height, int texture) {
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
-        gl.glPushMatrix();
-        gl.glTranslated(x, y, 0);
-        gl.glRotated(-45, 0, 0, 1);
-        gl.glScaled(width / 2.0, height / 2.0, 1);
-        gl.glBegin(GL.GL_QUADS);
-
-        Vertex(gl);
-
-        gl.glEnd();
-        gl.glPopMatrix();
-        gl.glDisable(GL.GL_BLEND);
-    }
+//    public void drawBackground(GL gl) {
+//        gl.glEnable(GL.GL_BLEND);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[0]);    // Turn Blending On
+//
+//        gl.glPushMatrix();
+//        gl.glBegin(GL.GL_QUADS);
+//
+//        Vertex(gl);
+//
+//        gl.glEnd();
+//        gl.glPopMatrix();
+//        gl.glDisable(GL.GL_BLEND);
+//    }
 
     public void createMap() {
+
 
         Random random = new Random();
         double randomNumber = random.nextDouble();
@@ -122,10 +143,12 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
 
         if (x < -250) {
+            tileType = 1;
             x += 70;
             y += 69 - speed;
 
         } else if (x > 250) {
+            tileType = 0;
             x -= 70;
             y += 69 - speed;
 
@@ -139,9 +162,43 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             }
             y += 69 - speed;
         }
-        tiles.add(new Tile(x, y, 1));
+        tiles.add(new Tile(x, y, tileType));
+
+//        System.out.println(tiles.size() + " tiles");
 
 
+    }
+
+    public void drawTile(GL gl, double x, double y, int angle, int width, int height, int texture) {
+        gl.glEnable(GL.GL_BLEND);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
+        gl.glPushMatrix();
+        gl.glTranslated(x, y, 0);
+        gl.glRotated(angle, 0, 0, 1);
+        gl.glScaled(width / 2.0, height / 2.0, 1);
+        gl.glBegin(GL.GL_QUADS);
+
+        Vertex(gl);
+
+        gl.glEnd();
+        gl.glPopMatrix();
+        gl.glDisable(GL.GL_BLEND);
+    }
+
+    public void drawBall(GL gl, double x, double y, int width, int height, int texture) {
+        gl.glEnable(GL.GL_BLEND);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
+        gl.glPushMatrix();
+        gl.glTranslated(x, y, 0);
+        gl.glRotated(-45, 0, 0, 1);
+        gl.glScaled(width / 2.0, height / 2.0, 1);
+        gl.glBegin(GL.GL_QUADS);
+
+        Vertex(gl);
+
+        gl.glEnd();
+        gl.glPopMatrix();
+        gl.glDisable(GL.GL_BLEND);
     }
 
     private void Vertex(GL gl) {
