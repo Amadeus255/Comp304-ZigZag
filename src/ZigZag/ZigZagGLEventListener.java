@@ -5,15 +5,26 @@ import Texture.TextureReader;
 import java.awt.event.*;
 import java.io.IOException;
 import javax.media.opengl.*;
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Random;
 import javax.media.opengl.glu.GLU;
+import javax.swing.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
-    int maxWidth = 600;
-    int maxHeight = 900;
+    int maxWidth = 700;
+    int maxHeight = 1000;
 
-    String[] textureNames = {"Back.png", "Ball1.png"};
+    int frame = 0;
+
+    double x = 0;
+    double y = 0;
+    double speed = 10;
+
+    ArrayList<Tile> tiles = new ArrayList<>();
+
+    String[] textureNames = {"Back.png", "Ball1.png", "Tile.png"};
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int[] textures = new int[textureNames.length];
 
@@ -24,7 +35,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void init(GLAutoDrawable gld) {
 
         GL gl = gld.getGL();
-        gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);    //This Will Clear The Background Color To Black
+        gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         gl.glEnable(GL.GL_TEXTURE_2D);  // Enable Texture Mapping
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
@@ -49,20 +60,25 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
                 e.printStackTrace();
             }
         }
-
+        gl.glLoadIdentity();
+        gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
     }
 
     public void display(GLAutoDrawable gld) {
 
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
-        gl.glLoadIdentity();
-        drawBackground(gl);
-        drawSprite(gl);
+        frame++;
+        createMap();
+        for (Tile tile : tiles) {
+            drawSprite(gl, tile.x, tile.y, 100, 100,2);
+            tile.y -= speed;
+        }
         handleKeyPress();
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
@@ -82,11 +98,13 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glDisable(GL.GL_BLEND);
     }
 
-    public void drawSprite(GL gl) {
+    public void drawSprite(GL gl, double x, double y, int width, int height, int texture) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[1]);    // Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
         gl.glPushMatrix();
-        gl.glScaled(0.1, 0.1, 1);
+        gl.glTranslated(x, y, 0);
+        gl.glRotated(-45, 0, 0, 1);
+        gl.glScaled( width / 2.0 ,  height / 2.0, 1);
         gl.glBegin(GL.GL_QUADS);
 
         Vertex(gl);
@@ -94,6 +112,46 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glEnd();
         gl.glPopMatrix();
         gl.glDisable(GL.GL_BLEND);
+    }
+
+    public void createMap() {
+
+        Random random = new Random();
+        double randomNumber = random.nextDouble();
+        int tileType;
+        if (randomNumber < 0.5) {
+            tileType = 0;
+        } else {
+            tileType = 1;
+        }
+
+        if(x < -250){
+            x += 70;
+            y += 69 - speed;
+
+        }
+        else if( x > 250){
+            x -= 70;
+            y += 69 - speed;
+
+        }
+
+        else if(x >= -250 && x < 250){
+            if(tileType == 1){
+                x += 70;
+
+            }
+            else{
+                x -= 70;
+
+            }
+            y += 69 - speed;
+        }
+        tiles.add(new Tile(x, y, 1));
+
+
+
+
     }
 
     private void Vertex(GL gl) {
