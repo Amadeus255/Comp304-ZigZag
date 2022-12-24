@@ -15,12 +15,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
     int maxWidth = 700;
     int maxHeight = 1000;
-
-    int frame = 0;
-
     double x = 0;
     double y = 0;
-    double speed = 10;
+    double speed = 3;
 
     ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -68,10 +65,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
-        frame++;
         createMap();
         for (Tile tile : tiles) {
-            drawSprite(gl, tile.x, tile.y, 100, 100,2);
+            drawSprite(gl, tile.x, tile.y, 100, 100, 2);
             tile.y -= speed;
         }
         handleKeyPress();
@@ -104,7 +100,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glPushMatrix();
         gl.glTranslated(x, y, 0);
         gl.glRotated(-45, 0, 0, 1);
-        gl.glScaled( width / 2.0 ,  height / 2.0, 1);
+        gl.glScaled(width / 2.0, height / 2.0, 1);
         gl.glBegin(GL.GL_QUADS);
 
         Vertex(gl);
@@ -125,31 +121,25 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             tileType = 1;
         }
 
-        if(x < -250){
+        if (x < -250) {
             x += 70;
             y += 69 - speed;
 
-        }
-        else if( x > 250){
+        } else if (x > 250) {
             x -= 70;
             y += 69 - speed;
 
-        }
-
-        else if(x >= -250 && x < 250){
-            if(tileType == 1){
+        } else if (x >= -250 && x < 250) {
+            if (tileType == 1) {
                 x += 70;
 
-            }
-            else{
+            } else {
                 x -= 70;
 
             }
             y += 69 - speed;
         }
         tiles.add(new Tile(x, y, 1));
-
-
 
 
     }
