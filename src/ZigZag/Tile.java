@@ -1,9 +1,10 @@
 package ZigZag;
 
 public class Tile {
-    int x, y, direction;
+    double x, y;
+    int direction;
 
-    public Tile(int x, int y, int direction, double length){
+    public Tile(double x, double y, int direction){
         this.x = x;
         this.y = y;
         this.direction = direction;

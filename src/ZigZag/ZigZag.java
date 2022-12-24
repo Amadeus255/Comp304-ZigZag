@@ -30,7 +30,7 @@ public class ZigZag extends JFrame {
 
         setTitle("ZigZag");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 900);
+        setSize(700, 1000);
         setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);
