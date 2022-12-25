@@ -11,11 +11,11 @@ public class GameOver extends JFrame implements ActionListener {
 
   public GameOver(){
 
-      setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
+      setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
       score= new JLabel();
+      score.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
       user = new JTextField();
       user.setMaximumSize(new Dimension(400,600));
-      user.setHorizontalAlignment(10);
       JLabel hScore = new JLabel();
       name = new JLabel("enter your name");
       name.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 30));
@@ -34,6 +34,7 @@ public class GameOver extends JFrame implements ActionListener {
       name.setAlignmentX(Component.CENTER_ALIGNMENT);
       username.setAlignmentX(Component.CENTER_ALIGNMENT);
       button.setAlignmentX(Component.CENTER_ALIGNMENT);
+      score.setAlignmentX(Component.CENTER_ALIGNMENT);
       add(Box.createVerticalGlue());
       add(label);
       add(Box.createRigidArea(new Dimension(0, 20)));
@@ -70,9 +71,9 @@ public class GameOver extends JFrame implements ActionListener {
         // TODO add your handling code here:
 
         String f=user.getText();
-        StringBuffer score1 = new StringBuffer(f+"Your Score is : "+scorei);
+        StringBuffer score1 = new StringBuffer(f+" your Score is : "+scorei);
          score.setText(score1.toString());
-        score.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
+
 
 
 
