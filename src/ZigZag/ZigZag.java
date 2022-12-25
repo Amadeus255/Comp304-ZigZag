@@ -2,6 +2,7 @@ package ZigZag;
 
 
 import com.sun.opengl.util.*;
+
 import java.awt.*;
 import javax.media.opengl.*;
 import javax.swing.*;

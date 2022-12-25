@@ -3,7 +3,7 @@ package ZigZag;
 public class Tile {
     double x, y;
     int angle;
-    boolean  invisible = false;
+    boolean invisible = false;
 
 
     public Tile(double x, double y, int direction) {
@@ -15,10 +15,9 @@ public class Tile {
         } else {
             angle = 45;
         }
-
     }
 
-    public void invalidate(){
+    public void invalidate() {
         invisible = y < -500;
     }
 
