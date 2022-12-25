@@ -13,6 +13,7 @@ import javax.swing.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
     Score score = new Score();
+    boolean paused;
     int maxWidth = 700;
     int maxHeight = 1000;
 
@@ -70,16 +71,25 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         frame++;
-        createMap();
-        for (Tile tile : tiles) {
-            drawSprite(gl, tile.x, tile.y, 100, 100, 2);
-            tile.y -= speed;
+        //press Space to pause the game
+        if (paused) {
+            try{
+                Thread.sleep(100);
+            }catch (InterruptedException ex){
+                ex.printStackTrace();
+            }
+        } else {
+            createMap();
+            for (Tile tile : tiles) {
+                drawSprite(gl, tile.x, tile.y, 100, 100, 2);
+                tile.y -= speed;
+            }
+            score.updateScore((float) speed);
         }
-        score.updateScore((float) speed);
-        if(gameOver){
+        if (gameOver) {
             score.storeSessionScore();
         }
-        System.out.println("CurrentScore: "+(int)score.getCurrentScore());
+        System.out.println("CurrentScore: " + (int) score.getCurrentScore());
         handleKeyPress();
     }
 
@@ -169,6 +179,14 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      * KeyListener
      */
     public void handleKeyPress() {
+        if(isKeyPressed(KeyEvent.VK_SPACE)){
+            paused= !paused;
+            try {
+                    Thread.sleep(100);
+            }catch (InterruptedException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     public BitSet keyBits = new BitSet(256);
