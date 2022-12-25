@@ -2,25 +2,29 @@ package ZigZag;
 
 import Texture.TextureReader;
 
-import java.awt.event.*;
-import java.io.IOException;
-import javax.media.opengl.*;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Random;
+import javax.media.opengl.GL;
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
-import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
     int maxWidth = 700;
     int maxHeight = 1000;
-
-    int frame = 0;
-
+    int tileType;
     double x = 0;
     double y = 0;
-    double speed = 10;
+    double speed = 5;
+    double xBall = 0;
+    double yBall = 0;
+
 
     ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -62,18 +66,30 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
         gl.glLoadIdentity();
         gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
+
     }
 
     public void display(GLAutoDrawable gld) {
 
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
-        frame++;
+
         createMap();
+
         for (Tile tile : tiles) {
-            drawSprite(gl, tile.x, tile.y, 100, 100,2);
+            drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
             tile.y -= speed;
+            tile.invalidate();
         }
+
+        Iterator<Tile> itr = tiles.iterator();
+        while (itr.hasNext()) {
+            Tile b = itr.next();
+            if (b.invisible) {
+                itr.remove();
+            }
+        }
+
         handleKeyPress();
     }
 
@@ -84,74 +100,89 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 
-    public void drawBackground(GL gl) {
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[0]);    // Turn Blending On
-
-        gl.glPushMatrix();
-        gl.glBegin(GL.GL_QUADS);
-
-        Vertex(gl);
-
-        gl.glEnd();
-        gl.glPopMatrix();
-        gl.glDisable(GL.GL_BLEND);
-    }
-
-    public void drawSprite(GL gl, double x, double y, int width, int height, int texture) {
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
-        gl.glPushMatrix();
-        gl.glTranslated(x, y, 0);
-        gl.glRotated(-45, 0, 0, 1);
-        gl.glScaled( width / 2.0 ,  height / 2.0, 1);
-        gl.glBegin(GL.GL_QUADS);
-
-        Vertex(gl);
-
-        gl.glEnd();
-        gl.glPopMatrix();
-        gl.glDisable(GL.GL_BLEND);
-    }
+//    public void drawBackground(GL gl) {
+//        gl.glEnable(GL.GL_BLEND);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[0]);    // Turn Blending On
+//
+//        gl.glPushMatrix();
+//        gl.glBegin(GL.GL_QUADS);
+//
+//        Vertex(gl);
+//
+//        gl.glEnd();
+//        gl.glPopMatrix();
+//        gl.glDisable(GL.GL_BLEND);
+//    }
 
     public void createMap() {
 
+
+//        tiles.add(new Tile(x, y, tileType));
+
+        tiles.add(new Tile(x, y, tileType));
         Random random = new Random();
         double randomNumber = random.nextDouble();
-        int tileType;
+
         if (randomNumber < 0.5) {
             tileType = 0;
         } else {
             tileType = 1;
         }
 
-        if(x < -250){
+        if (x < -250) {
+            tileType = 1;
             x += 70;
             y += 69 - speed;
 
-        }
-        else if( x > 250){
+        } else if (x > 250) {
+            tileType = 0;
             x -= 70;
             y += 69 - speed;
 
-        }
-
-        else if(x >= -250 && x < 250){
-            if(tileType == 1){
+        } else if (x >= -250 && x < 250) {
+            if (tileType == 1) {
                 x += 70;
 
-            }
-            else{
+            } else {
                 x -= 70;
 
             }
             y += 69 - speed;
         }
-        tiles.add(new Tile(x, y, 1));
 
 
+    }
 
+    public void drawTile(GL gl, double x, double y, int angle, int width, int height, int texture) {
+        gl.glEnable(GL.GL_BLEND);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
+        gl.glPushMatrix();
+        gl.glTranslated(x, y, 0);
+        gl.glRotated(angle, 0, 0, 1);
+        gl.glScaled(width / 2.0, height / 2.0, 1);
+        gl.glBegin(GL.GL_QUADS);
 
+        Vertex(gl);
+
+        gl.glEnd();
+        gl.glPopMatrix();
+        gl.glDisable(GL.GL_BLEND);
+    }
+
+    public void drawBall(GL gl, double x, double y, int width, int height, int texture) {
+        gl.glEnable(GL.GL_BLEND);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
+        gl.glPushMatrix();
+        gl.glTranslated(x, y, 0);
+        gl.glRotated(-45, 0, 0, 1);
+        gl.glScaled(width / 2.0, height / 2.0, 1);
+        gl.glBegin(GL.GL_QUADS);
+
+        Vertex(gl);
+
+        gl.glEnd();
+        gl.glPopMatrix();
+        gl.glDisable(GL.GL_BLEND);
     }
 
     private void Vertex(GL gl) {
