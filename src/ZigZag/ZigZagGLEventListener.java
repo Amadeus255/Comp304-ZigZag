@@ -2,12 +2,15 @@ package ZigZag;
 
 import Score.Score;
 import Texture.TextureReader;
+import Texture.*;
+import com.sun.opengl.util.j2d.TextRenderer;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -17,7 +20,7 @@ import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
-    Score score = new Score();
+    static Score score = new Score();
     boolean paused = false;
     int maxWidth = 700;
     int maxHeight = 1000;
@@ -31,6 +34,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     double speed = 3;
     double xBall = 0;
     double yBall = 0;
+    TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
 
 
     ArrayList<Tile> tiles = new ArrayList<>();
@@ -240,11 +244,11 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      * KeyListener
      */
     public void handleKeyPress() {
-        if(isKeyPressed(KeyEvent.VK_SPACE)){
+        if (isKeyPressed(KeyEvent.VK_SPACE)) {
             paused = !paused;
             try {
                 Thread.sleep(100);
-            }catch (InterruptedException ex){
+            } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         }
@@ -277,10 +281,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if(flag == 0){
+        if (flag == 0) {
             flag = 1;
-        }
-        else {
+        } else {
             flag = 0;
         }
 

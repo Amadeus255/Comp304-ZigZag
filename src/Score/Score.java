@@ -14,6 +14,7 @@ public class Score {
     public Score() {
         readHighScore();
     }
+
     public int getCurrentSessionScore() {
         return currentSessionScore;
     }
@@ -27,14 +28,14 @@ public class Score {
     }
 
     public void updateScore(float ballSpeed) {
-        if(currentSessionScore==0) // the ball has not yet crashed
-            currentScore += ballSpeed/20;
+        if (currentSessionScore == 0) // the ball has not yet crashed
+            currentScore += ballSpeed / 20;
 
     }
 
     public void storeSessionScore() {
         currentSessionScore = (int) currentScore;
-        if(currentSessionScore > highScore){
+        if (currentSessionScore > highScore) {
             writeHighScore(currentSessionScore);
             highScore = currentSessionScore;
         }
@@ -48,14 +49,14 @@ public class Score {
         this.currentScore = currentScore;
     }
 
-    public void readHighScore(){
+    public void readHighScore() {
         try {
             FileReader reader = new FileReader("highScore.txt");
             char[] score = new char[5];
             char r;
             StringBuilder builder = new StringBuilder();
 
-            while(Character.isDigit(r=(char) reader.read())){
+            while (Character.isDigit(r = (char) reader.read())) {
                 builder.append(r);
             }
 
@@ -68,7 +69,7 @@ public class Score {
         }
     }
 
-    public void writeHighScore(int score){
+    public void writeHighScore(int score) {
         try {
             FileWriter writer = new FileWriter("highScore.txt", false);
             writer.write(String.valueOf(score));
