@@ -36,7 +36,9 @@ public class GameOver extends JFrame implements ActionListener {
       button.setAlignmentX(Component.CENTER_ALIGNMENT);
       add(Box.createVerticalGlue());
       add(label);
+      add(Box.createRigidArea(new Dimension(0, 20)));
       add(name);
+      add(Box.createRigidArea(new Dimension(0, 20)));
       add(user);
       add(Box.createRigidArea(new Dimension(0, 20)));
       add(username);
