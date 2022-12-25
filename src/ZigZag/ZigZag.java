@@ -24,7 +24,7 @@ public class ZigZag extends JFrame {
 
         add(glcanvas, BorderLayout.CENTER);
 
-        animator = new FPSAnimator(60);
+        animator = new FPSAnimator(30);
         animator.add(glcanvas);
         animator.start();
 

@@ -1,9 +1,7 @@
 package ZigZag;
 
-import Texture.* ;
-import com.sun.opengl.util.j2d.TextRenderer;
+import Texture.TextureReader;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import javax.media.opengl.*;
@@ -22,10 +20,8 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
     double x = 0;
     double y = 0;
-    double speed = 5;
-    static int score = 0;
+    double speed = 10;
 
-    TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
     ArrayList<Tile> tiles = new ArrayList<>();
 
     String[] textureNames = {"Back.png", "Ball1.png", "Tile.png"};
@@ -66,7 +62,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
         gl.glLoadIdentity();
         gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
-
     }
 
     public void display(GLAutoDrawable gld) {
@@ -74,7 +69,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         frame++;
-        score++;
         createMap();
         for (Tile tile : tiles) {
             drawSprite(gl, tile.x, tile.y, 100, 100,2);
@@ -110,7 +104,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glPushMatrix();
         gl.glTranslated(x, y, 0);
         gl.glRotated(-45, 0, 0, 1);
-        gl.glScaled(width / 2.0, height / 2.0, 1);
+        gl.glScaled( width / 2.0 ,  height / 2.0, 1);
         gl.glBegin(GL.GL_QUADS);
 
         Vertex(gl);
