@@ -8,13 +8,13 @@ import java.awt.*;
  * @author moham
  */
 public class Main extends javax.swing.JFrame {
-
+ static Main m;
     /**
      * Creates new form NewJFrame1
      */
     public Main() {
         initComponents();
-    }
+                                                        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,6 +73,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        m.setVisible(false);
         new ZigZag().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -80,7 +81,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         new GameOver().setVisible(true);
 //        new Second().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GE
+    // N-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,7 +115,8 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                m=new Main();
+                        m.setVisible(true);
             }
         });
     }

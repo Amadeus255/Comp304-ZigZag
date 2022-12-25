@@ -1,5 +1,7 @@
 package ZigZag;
 
+import Texture.TextureReader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,9 +9,13 @@ import java.awt.event.ActionListener;
 
 public class GameOver extends JFrame implements ActionListener {
 
+    String textureNames[] = {"GameOver.png"};
+    TextureReader.Texture texture[] = new TextureReader.Texture[textureNames.length];
+    int textures[] = new int[textureNames.length];
     int scorei = ZigZagGLEventListener.score;
 
   public GameOver(){
+
 
       setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
       score= new JLabel();
@@ -19,16 +25,35 @@ public class GameOver extends JFrame implements ActionListener {
       JLabel hScore = new JLabel();
       name = new JLabel("enter your name");
       name.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 30));
-      JButton username = new JButton("Ok");
-      username.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-      username.setSize(20,20);
+      //ok button
+      JButton username = new JButton();
+      ImageIcon icon1 = new ImageIcon(getClass().getResource("/Assets/Ok.png"));
+      Image img1 = icon1.getImage() ;
+      Image newimg1 = img1.getScaledInstance(200,100,Image.SCALE_SMOOTH);
+      username.setBorderPainted(false);
+     username.setContentAreaFilled(false);
+      username.setFocusPainted(false);
+      username.setOpaque(false);
+      username.setIcon(new ImageIcon(newimg1));
       username.addActionListener(this::Ok);
-      JLabel label =new JLabel("Game Over");
+
+
+      JLabel label =new JLabel();
+      ImageIcon icon2 =new ImageIcon(getClass().getResource("/Assets/GameOver.png"));
+      Image img2 = icon2.getImage();
+      Image newimg2 = img2.getScaledInstance(200,200,Image.SCALE_SMOOTH);
+      label.setIcon(new ImageIcon(newimg2));
       label.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
       // play again button
-      JButton button = new JButton("Play Again");
-      button.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-      button.setSize(20,20);
+      JButton button = new JButton();
+      ImageIcon icon = new ImageIcon(getClass().getResource("/Assets/playagain.jpeg"));
+      Image img = icon.getImage() ;
+      Image newimg = img.getScaledInstance(200,100,Image.SCALE_SMOOTH);
+      button.setBorderPainted(false);
+      button.setContentAreaFilled(false);
+      button.setFocusPainted(false);
+      button.setOpaque(false);
+      button.setIcon(new ImageIcon(newimg));
       button.addActionListener(this::Clicked);
       label.setAlignmentX(Component.CENTER_ALIGNMENT);
       name.setAlignmentX(Component.CENTER_ALIGNMENT);
