@@ -19,7 +19,7 @@ public class Tile {
     }
 
     public void invalidate(){
-        invisible = y < -600;
+        invisible = y < -500;
     }
 
 }

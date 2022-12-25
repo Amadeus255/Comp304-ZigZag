@@ -12,15 +12,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
     int maxWidth = 700;
     int maxHeight = 1000;
+    int tileType;
     double x = 0;
     double y = 0;
     double speed = 5;
@@ -69,42 +67,28 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glLoadIdentity();
         gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
 
-//        createMap();
-
     }
 
     public void display(GLAutoDrawable gld) {
 
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+
         createMap();
+
         for (Tile tile : tiles) {
             drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
             tile.y -= speed;
             tile.invalidate();
-            System.out.println(tiles.size() + " tiles");
         }
-//        tiles.add(new Tile(x, y, 0));
-//        for  (int i = 0; i < tiles.size(); i++) {
-//            Tile tile = tiles.get(i);
-//            drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
-//            tile.y -= speed;
-//            if (tile.y < -500) {
-//                tiles.remove(tile);
-//                createMap();
-//            }
-//            System.out.println(tiles.size() + " tiles");
-//        }
 
-//        Iterator <Tile> itr = tiles.iterator();
-//        while (itr.hasNext()) {
-//            Tile b = itr.next();
-//            if (b.invisible){
-////                itr.remove();
-//                createMap();
-//            }
-//        }
-
+        Iterator<Tile> itr = tiles.iterator();
+        while (itr.hasNext()) {
+            Tile b = itr.next();
+            if (b.invisible) {
+                itr.remove();
+            }
+        }
 
         handleKeyPress();
     }
@@ -133,9 +117,12 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void createMap() {
 
 
+//        tiles.add(new Tile(x, y, tileType));
+
+        tiles.add(new Tile(x, y, tileType));
         Random random = new Random();
         double randomNumber = random.nextDouble();
-        int tileType;
+
         if (randomNumber < 0.5) {
             tileType = 0;
         } else {
@@ -162,9 +149,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             }
             y += 69 - speed;
         }
-        tiles.add(new Tile(x, y, tileType));
-
-//        System.out.println(tiles.size() + " tiles");
 
 
     }
