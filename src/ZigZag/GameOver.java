@@ -10,9 +10,6 @@ import java.awt.event.ActionListener;
 
 public class GameOver extends JFrame implements ActionListener {
 
-    String textureNames[] = {"GameOver.png"};
-    TextureReader.Texture texture[] = new TextureReader.Texture[textureNames.length];
-    int textures[] = new int[textureNames.length];
     Score scorei = ZigZagGLEventListener.score;
 
     public GameOver() {
@@ -80,7 +77,7 @@ public class GameOver extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 700);
         setLocationRelativeTo(null);
-        setVisible(true);
+        setVisible(false);
         setFocusable(true);
 
 
@@ -89,7 +86,10 @@ public class GameOver extends JFrame implements ActionListener {
     public void Clicked(
             java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        new ZigZag().setVisible(true);
+        this.dispose();
+        MainMenu.zigzag.dispose();
+        MainMenu.zigzag=new ZigZag();
+        MainMenu.zigzag.setVisible(true);
 
 
     }
@@ -99,17 +99,12 @@ public class GameOver extends JFrame implements ActionListener {
         // TODO add your handling code here:
 
         String f = user.getText();
-        StringBuffer score1 = new StringBuffer(f + " your Score is : " + scorei.getCurrentScore());
+        StringBuffer score1 = new StringBuffer(f + " your score is : " + (int)scorei.getCurrentScore());
         score.setText(score1.toString());
 
 
     }
 
-    public static void s() {
-        new GameOver();
-    }
-//    public  static void printScore(int score) {
-//        System.out.println(score);
 
 
     @Override

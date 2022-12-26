@@ -9,9 +9,7 @@ import javax.swing.*;
 
 public class ZigZag extends JFrame {
 
-    public static void main(String[] args) {
-        new ZigZag();
-    }
+
 
     public ZigZag() {
         GLCanvas glcanvas;
@@ -33,7 +31,7 @@ public class ZigZag extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 1000);
         setLocationRelativeTo(null);
-        setVisible(true);
+        setVisible(false);
         setFocusable(true);
         glcanvas.requestFocus();
     }
