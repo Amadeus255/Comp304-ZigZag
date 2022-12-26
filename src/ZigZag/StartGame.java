@@ -52,7 +52,7 @@ public class StartGame extends JFrame implements ActionListener {
 
     public void Play() {
         // TODO add your handling code here:
-        new ZigZag().setVisible(true);
+       // new ZigZag().setVisible(true);
 
     }
 

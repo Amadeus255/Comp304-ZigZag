@@ -9,7 +9,7 @@ import javax.swing.*;
  */
 public class MainMenu extends javax.swing.JFrame {
     static MainMenu menu;
-    static ZigZag zigzag = new ZigZag();
+    static ZigZag zigzag = new ZigZag(5);
 
     /**
      * Creates new form NewJFrame1

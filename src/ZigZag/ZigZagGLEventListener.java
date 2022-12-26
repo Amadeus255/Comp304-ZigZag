@@ -102,7 +102,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         if (gameOver) {
             score.storeSessionScore();
             gameover.setVisible(gameOver);
-            MainMenu.zigzag.setVisible(false);
+            ChoseLevel.zigzag.setVisible(false);
         }
         System.out.println(score.getCurrentScore());
         handleKeyPress();

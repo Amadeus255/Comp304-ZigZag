@@ -179,8 +179,8 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             mouseY = maxHeight / 2 - ((int) ((y / height) * maxHeight));
 
             if (mouseX > -75 && mouseX < 75 && mouseY > -72 && mouseY < 72)
-                //System.out.println("Test");
-                new ZigZag();
+                System.out.println("Test");
+                //new ZigZag();
 
            //glc.repaint();
         }

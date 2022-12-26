@@ -89,9 +89,9 @@ public class GameOver extends JFrame implements ActionListener {
         this.dispose();
         scorei.setCurrentSessionScore(0);
         scorei.setCurrentScore(0);
-        MainMenu.zigzag.dispose();
-        MainMenu.zigzag=new ZigZag();
-        MainMenu.zigzag.setVisible(true);
+        ChoseLevel.zigzag.dispose();
+        ChoseLevel c = new ChoseLevel();
+
 
 
     }

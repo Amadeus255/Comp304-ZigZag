@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 public class ChoseLevel extends JFrame implements ActionListener{
-
+    static ZigZag zigzag ;
     public ChoseLevel(){
 
         setLayout(null);
@@ -40,7 +40,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         button2.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
         button2.setSize(200,100);
         button2.setLocation(250,220);
-        button2.addActionListener(this::Play);
+        button2.addActionListener(this::PlayMedium);
         button2.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, 0)));
 
@@ -48,7 +48,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         button3.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
         button3.setSize(200,100);
         button3.setLocation(250,370);
-        button3.addActionListener(this::Play);
+        button3.addActionListener(this::PlayHard);
         button3.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, -10)));
 
@@ -61,10 +61,28 @@ public class ChoseLevel extends JFrame implements ActionListener{
 
     }
 
-    public void Play(
+    private void Play(
             java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        new ZigZag().setVisible(true);
+        this.dispose();
+      zigzag = new ZigZag(5);
+      zigzag.setVisible(true);
+
+    }
+    private void PlayMedium(
+            java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        this.dispose();
+        zigzag=new ZigZag(8);
+        zigzag.setVisible(true);
+
+    }
+    private void PlayHard(
+            java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        this.dispose();
+        zigzag=new ZigZag(10);
+        zigzag.setVisible(true);
 
     }
     public class ChoseLevelGLEventListener implements GLEventListener{

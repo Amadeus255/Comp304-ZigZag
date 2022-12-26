@@ -12,10 +12,11 @@ public class ZigZag extends JFrame {
 
 
 
-    public ZigZag() {
+    public ZigZag(int speed) {
         GLCanvas glcanvas;
         Animator animator;
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
+        listener.speed=speed;
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
         glcanvas.addMouseListener(listener);
