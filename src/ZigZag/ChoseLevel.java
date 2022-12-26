@@ -68,7 +68,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
             java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.dispose();
-      zigzag = new ZigZag(5);
+      zigzag = new ZigZag(3);
       zigzag.setVisible(true);
 
     }
@@ -76,7 +76,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
             java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.dispose();
-        zigzag=new ZigZag(8);
+        zigzag=new ZigZag(5);
         zigzag.setVisible(true);
 
     }
@@ -84,7 +84,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
             java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.dispose();
-        zigzag=new ZigZag(10);
+        zigzag=new ZigZag(7);
         zigzag.setVisible(true);
 
     }
