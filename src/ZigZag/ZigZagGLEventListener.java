@@ -26,6 +26,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     int maxHeight = 1000;
     int tileType = 1;
     int flag = -1;
+    int levelCounter = 0;
     boolean gameOver = false;
     double x = 0;
     double y = 0;
@@ -101,7 +102,12 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             gameover.setVisible(gameOver);
             ChoseLevel.zigzag.setVisible(false);
         }
-        System.out.println((int) score.getCurrentScore());
+
+        levelCounter++;
+        if (levelCounter % 100 == 0) {
+            levelCounter = 0;
+            speed += 0.25;
+        }
         handleKeyPress();
     }
 
@@ -178,11 +184,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             }
 
             tile.invalidate();
-            if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 25) {
+            if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 20) {
                 if (!(0 <= Math.abs(xBall - tile.x) && Math.abs(xBall - tile.x) <= 85)) {
-                    // n.endRendering();
                     gameOver = true;
-                    //goes to score screen later
                 }
             }
         }
