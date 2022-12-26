@@ -19,10 +19,13 @@ public class ChoseLevel extends JFrame implements ActionListener{
     public ChoseLevel(){
 
         setLayout(null);
+        JLabel label1 =new JLabel(new ImageIcon(getClass().getResource("/Assets/background.png")));
+        label1.setBounds(0,0,850,450);
+
         setTitle("Start Game");
         //getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 700);
+        setSize(700, 1000);
         setLocationRelativeTo(null);
         setVisible(true);
         //setFocusable(true);
@@ -30,7 +33,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         JButton button1 = new JButton("Easy");
         button1.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
         button1.setSize(200,100);
-        button1.setLocation(250,70);
+        button1.setLocation(250,100);
         button1.addActionListener(this::Play);
         button1.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(button1);
@@ -39,7 +42,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         JButton button2 = new JButton("Medium");
         button2.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
         button2.setSize(200,100);
-        button2.setLocation(250,220);
+        button2.setLocation(250,300);
         button2.addActionListener(this::Play);
         button2.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, 0)));
@@ -47,7 +50,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         JButton button3 = new JButton("Hard");
         button3.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
         button3.setSize(200,100);
-        button3.setLocation(250,370);
+        button3.setLocation(250,500);
         button3.addActionListener(this::Play);
         button3.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, -10)));
@@ -56,7 +59,7 @@ public class ChoseLevel extends JFrame implements ActionListener{
         //add(button1);
        add(button2);
        add(button3);
-
+        add(label1);
 
 
     }

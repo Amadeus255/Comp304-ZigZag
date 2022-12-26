@@ -13,6 +13,7 @@ import javax.swing.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
+    public static int score;
     int maxWidth = 700;
     int maxHeight = 1000;
 
