@@ -24,17 +24,17 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     boolean paused = false;
     int maxWidth = 700;
     int maxHeight = 1000;
-    int tileType;
+    int tileType = 1;
     boolean removed = false;
-    int flag = 0;
+    int flag = -1;
     boolean gameOver = false;
 
     int frame = 0;
     double x = 0;
     double y = 0;
-    double speed = 5;
-    double xBall = -70;
-    double yBall = -70;
+    double speed = 3;
+    double xBall = 0;
+    double yBall = 0;
     TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
 
 
@@ -94,9 +94,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
                 ex.printStackTrace();
             }
         } else {
-
             createMap();
             drawMap(gl);
+
             drawBall(gl, xBall, yBall, 50, 50, 1);
             score.updateScore((float) speed);
         }
@@ -151,7 +151,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void drawMap(GL gl) {
         for (Tile tile : tiles) {
             drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
-            tile.y -= speed;
+            if(flag == 1 || flag == 0){
+                tile.y -= speed;
+            }
+
             tile.invalidate();
 
             if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 25) {
@@ -195,9 +198,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glBindTexture(GL.GL_TEXTURE_2D, textures[texture]);    // Turn Blending On
         gl.glPushMatrix();
         gl.glTranslated(x, y, 0);
-        if (flag == 0) {
+         if(flag == 1) {
             xBall += speed;
-        } else {
+        }
+        else if(flag == 0){
             xBall -= speed;
         }
         gl.glRotated(-45, 0, 0, 1);
@@ -228,14 +232,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      * KeyListener
      */
     public void handleKeyPress() {
-        if (isKeyPressed(KeyEvent.VK_SPACE)) {
-            paused = !paused;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
+
     }
 
     public BitSet keyBits = new BitSet(256);
@@ -254,7 +251,21 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
     @Override
     public void keyTyped(final KeyEvent event) {
-        // don't care
+        if (event.getKeyChar() == KeyEvent.VK_SPACE) {
+            if (flag == -1 || flag == 0) {
+                flag = 1;
+            } else if (flag == 1) {
+                flag = 0;
+            }
+        }
+        if(event.getKeyChar() == KeyEvent.VK_ESCAPE){
+            paused = !paused;
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public boolean isKeyPressed(final int keyCode) {
@@ -265,9 +276,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (flag == 0) {
+        if (flag == -1 || flag == 0) {
             flag = 1;
-        } else {
+        } else if (flag == 1) {
             flag = 0;
         }
 

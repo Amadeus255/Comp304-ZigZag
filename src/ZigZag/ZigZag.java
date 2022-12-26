@@ -20,6 +20,7 @@ public class ZigZag extends JFrame {
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
+        glcanvas.addKeyListener(listener);
         glcanvas.addMouseListener(listener);
         listener.setCanvas(glcanvas);
 
