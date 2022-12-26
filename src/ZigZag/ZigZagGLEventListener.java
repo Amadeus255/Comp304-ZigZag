@@ -2,7 +2,6 @@ package ZigZag;
 
 import Score.Score;
 import Texture.TextureReader;
-import Texture.*;
 import com.sun.opengl.util.j2d.TextRenderer;
 
 import javax.media.opengl.GL;
@@ -20,7 +19,8 @@ import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
-    static Score score = new Score();
+    public static Score score = new Score();
+    GameOver gameover=new GameOver();
     boolean paused = false;
     int maxWidth = 700;
     int maxHeight = 1000;
@@ -49,7 +49,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      x and y coordinate for gun
      */
     public void init(GLAutoDrawable gld) {
-
         GL gl = gld.getGL();
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -83,7 +82,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     }
 
     public void display(GLAutoDrawable gld) {
-
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         frame++;
@@ -102,8 +100,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
         if (gameOver) {
             score.storeSessionScore();
+            gameover.setVisible(gameOver);
+            ChoseLevel.zigzag.setVisible(false);
         }
-//        System.out.println("CurrentScore: " + (int) score.getCurrentScore());
+        System.out.println(score.getCurrentScore());
         handleKeyPress();
     }
 
@@ -159,7 +159,11 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
             if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 25) {
                 if (!(0 <= Math.abs(xBall - tile.x) && Math.abs(xBall - tile.x) <= 85)) {
-                    n.endRendering(); //goes to score screen later
+                   // n.endRendering();
+                    gameOver=true;
+
+
+                    //goes to score screen later
                 }
             }
         }
@@ -232,7 +236,14 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      * KeyListener
      */
     public void handleKeyPress() {
-
+        if (isKeyPressed(KeyEvent.VK_SPACE)) {
+            paused = !paused;
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public BitSet keyBits = new BitSet(256);

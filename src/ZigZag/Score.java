@@ -1,4 +1,4 @@
-package Score;
+package ZigZag;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -51,7 +51,7 @@ public class Score {
 
     public void readHighScore() {
         try {
-            FileReader reader = new FileReader("highScore.txt");
+            FileReader reader = new FileReader("res/score/highScore.txt");
             char[] score = new char[5];
             char r;
             StringBuilder builder = new StringBuilder();
@@ -71,7 +71,7 @@ public class Score {
 
     public void writeHighScore(int score) {
         try {
-            FileWriter writer = new FileWriter("highScore.txt", false);
+            FileWriter writer = new FileWriter("res/score/highScore.txt", false);
             writer.write(String.valueOf(score));
             writer.close();
         } catch (IOException e) {

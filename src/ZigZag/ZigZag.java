@@ -9,15 +9,13 @@ import javax.swing.*;
 
 public class ZigZag extends JFrame {
 
-    public static void main(String[] args) {
-        new ZigZag();
-    }
 
-    public ZigZag() {
+
+    public ZigZag(int speed) {
         GLCanvas glcanvas;
         Animator animator;
-
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
+        listener.speed=speed;
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
@@ -34,7 +32,7 @@ public class ZigZag extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 1000);
         setLocationRelativeTo(null);
-        setVisible(true);
+        setVisible(false);
         setFocusable(true);
         glcanvas.requestFocus();
     }
