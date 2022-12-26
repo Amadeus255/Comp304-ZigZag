@@ -30,6 +30,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     boolean gameOver = false;
 
     int frame = 0;
+
     double x = 0;
     double y = 0;
     double speed = 3;
@@ -236,14 +237,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      * KeyListener
      */
     public void handleKeyPress() {
-        if (isKeyPressed(KeyEvent.VK_SPACE)) {
-            paused = !paused;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
+
     }
 
     public BitSet keyBits = new BitSet(256);

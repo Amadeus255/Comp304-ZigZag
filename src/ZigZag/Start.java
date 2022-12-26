@@ -27,7 +27,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
      */
     public Start() {
         //initComponents();
-        setSize(800,800);
+        //setSize(800,800);
         GLCanvas glcanvas;
         //Animator animator;
 
@@ -45,7 +45,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
         setTitle("ZigZag");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(700, 1000);
+        setSize(700, 1000);
         setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);
@@ -157,8 +157,8 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
     public class StartGlEventListener implements GLEventListener, MouseListener {
 
-        int maxWidth = 400;
-        int maxHeight = 400;
+        int maxWidth = 700;
+        int maxHeight = 1000;
 
         String[] textureNames = {"background.png", "play.png"};
         TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
@@ -178,9 +178,9 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             mouseX = (int) ((x / width) * maxWidth) - maxWidth / 2;
             mouseY = maxHeight / 2 - ((int) ((y / height) * maxHeight));
 
-            if (mouseX > -75 && mouseX < 75 && mouseY > -72 && mouseY < 72)
-                System.out.println("Test");
-                //new ZigZag();
+            if (mouseX > -90 && mouseX < 90 && mouseY > -70 && mouseY < 70)
+                //System.out.println("Test");
+                new ChoseLevel();
 
            //glc.repaint();
         }
@@ -235,7 +235,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
                 }
             }
             gl.glLoadIdentity();
-            gl.glOrtho(-200, 200, -200, 200, -1, 1);
+            gl.glOrtho(-350, 350, -500, 500, -1, 1);
 
         }
 
@@ -249,7 +249,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             DrawBackground(gl);
 
             gl.glPushMatrix();
-            DrawBotton(gl,0,0,250,255,1);
+            DrawBotton(gl,0,0,600,400,1);
             gl.glPopMatrix();
 
 
@@ -263,7 +263,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
 //        gl.glColor3f(0, 0.5f, 0.5f);
             gl.glPushMatrix();
-            gl.glScaled(400, 400, 1);
+            gl.glScaled(700, 1000, 1);
             gl.glBegin(GL.GL_QUADS);
             // Front Face
             gl.glTexCoord2f(0.0f, 0.0f);
