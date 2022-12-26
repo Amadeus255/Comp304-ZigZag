@@ -20,7 +20,8 @@ import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
-    static Score score = new Score();
+    public static Score score = new Score();
+    GameOver gameover=new GameOver();
     boolean paused = false;
     int maxWidth = 700;
     int maxHeight = 1000;
@@ -32,7 +33,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     int frame = 0;
     double x = 0;
     double y = 0;
-    double speed = 5;
+    double speed = 3;
     double xBall = -70;
     double yBall = -70;
     TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
@@ -49,7 +50,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
      x and y coordinate for gun
      */
     public void init(GLAutoDrawable gld) {
-
         GL gl = gld.getGL();
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -83,7 +83,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     }
 
     public void display(GLAutoDrawable gld) {
-
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         frame++;
@@ -102,8 +101,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         }
         if (gameOver) {
             score.storeSessionScore();
+            gameover.setVisible(gameOver);
+            MainMenu.zigzag.setVisible(false);
         }
-//        System.out.println("CurrentScore: " + (int) score.getCurrentScore());
+        System.out.println(score.getCurrentScore());
         handleKeyPress();
     }
 
@@ -156,7 +157,11 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
             if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 25) {
                 if (!(0 <= Math.abs(xBall - tile.x) && Math.abs(xBall - tile.x) <= 85)) {
-                    n.endRendering(); //goes to score screen later
+                   // n.endRendering();
+                    gameOver=true;
+
+
+                    //goes to score screen later
                 }
             }
         }
