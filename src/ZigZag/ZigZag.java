@@ -7,12 +7,19 @@ import java.awt.*;
 import javax.media.opengl.*;
 import javax.swing.*;
 
+import static java.awt.Transparency.TRANSLUCENT;
+
 public class ZigZag extends JFrame {
 
     public ZigZag(int speed) {
+
         GLCanvas glcanvas;
         Animator animator;
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
+        listener.ShowCurrentScore.setBounds(5,5,60,20);
+        listener.ShowCurrentScore.setMaximumSize(new Dimension(25,20));
+        listener.ShowCurrentScore.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 11));
+        add(listener.ShowCurrentScore);
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
@@ -23,6 +30,7 @@ public class ZigZag extends JFrame {
         animator = new FPSAnimator(30);
         animator.add(glcanvas);
         animator.start();
+
         setTitle("ZigZag");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 1000);

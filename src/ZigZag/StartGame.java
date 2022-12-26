@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-public class StartGame extends JFrame implements ActionListener {
+public class  StartGame extends JFrame implements ActionListener {
 
     public StartGame(){
 
@@ -21,9 +21,14 @@ public class StartGame extends JFrame implements ActionListener {
         label.setBounds(270,200,200,50);
 
 
-        JLabel button = new JLabel("Start Game");
-        button.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        button.setBounds(230,350,300,100);
+        JLabel button = new JLabel();
+        ImageIcon icon1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/Play_Button.png")));
+        Image img1 = icon1.getImage();
+        Image newimg1 = img1.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+        button.setIcon(new ImageIcon(newimg1));
+        button.setOpaque(false);
+//        button.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
+       button.setBounds(230,350,300,100);
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

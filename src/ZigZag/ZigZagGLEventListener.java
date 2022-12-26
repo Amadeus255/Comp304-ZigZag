@@ -9,6 +9,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,6 +21,7 @@ import java.util.*;
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
     public static Score score = new Score();
+    public JTextArea ShowCurrentScore = new JTextArea();
     GameOver gameover = new GameOver();
     boolean paused = false;
     int maxWidth = 700;
@@ -80,6 +82,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     }
 
     public void display(GLAutoDrawable gld) {
+        ShowCurrentScore.setText("score:"+(int)score.getCurrentScore());
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         if (paused) {
