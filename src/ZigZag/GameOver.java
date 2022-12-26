@@ -1,6 +1,5 @@
 package ZigZag;
 
-import Score.Score;
 import Texture.TextureReader;
 
 import javax.swing.*;

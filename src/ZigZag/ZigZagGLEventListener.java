@@ -1,8 +1,6 @@
 package ZigZag;
 
-import Score.Score;
 import Texture.TextureReader;
-import Texture.*;
 import com.sun.opengl.util.j2d.TextRenderer;
 
 import javax.media.opengl.GL;

@@ -1,7 +1,6 @@
 package ZigZag;
 
 
-import Score.Score;
 import com.sun.opengl.util.*;
 
 import java.awt.*;
