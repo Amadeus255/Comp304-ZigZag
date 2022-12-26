@@ -10,10 +10,7 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 /**
@@ -35,6 +32,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
         glcanvas.addMouseListener(listener);
+        glcanvas.addKeyListener(listener);
         listener.setCanvas(glcanvas);
 
         add(glcanvas, BorderLayout.CENTER);
@@ -155,7 +153,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
     }
     // End of variables declaration//GEN-END:variables
 
-    public class StartGlEventListener implements GLEventListener, MouseListener {
+    public static class StartGlEventListener implements GLEventListener, MouseListener, KeyListener {
 
         int maxWidth = 700;
         int maxHeight = 1000;
@@ -317,6 +315,21 @@ public class Start extends javax.swing.JFrame implements ActionListener {
         }
 
         public void setCanvas(GLCanvas glcanvas) {
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
         }
     }
 

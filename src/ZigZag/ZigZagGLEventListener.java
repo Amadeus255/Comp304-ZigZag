@@ -25,11 +25,8 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     int maxWidth = 700;
     int maxHeight = 1000;
     int tileType = 1;
-    int flag = 1;
+    int flag = -1;
     boolean gameOver = false;
-
-
-
     double x = 0;
     double y = 0;
     double speed = 3;
@@ -86,14 +83,13 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         if (paused) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         } else {
             createMap();
             drawMap(gl);
-
             drawBall(gl, xBall, yBall, 50, 50, 1);
             score.updateScore((float) speed);
         }
@@ -102,7 +98,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             gameover.setVisible(gameOver);
             ChoseLevel.zigzag.setVisible(false);
         }
-        System.out.println(score.getCurrentScore());
+        System.out.println((int) score.getCurrentScore());
         handleKeyPress();
     }
 
@@ -150,15 +146,15 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void drawMap(GL gl) {
         for (Tile tile : tiles) {
             drawTile(gl, tile.x, tile.y, tile.angle, 100, 100, 2);
-
-
-            tile.y -= speed;
+            if (flag == 1 || flag == 0) {
+                tile.y -= speed;
+            }
 
             tile.invalidate();
             if ((0 <= Math.abs(yBall - tile.y)) && Math.abs(yBall - tile.y) <= 25) {
                 if (!(0 <= Math.abs(xBall - tile.x) && Math.abs(xBall - tile.x) <= 85)) {
                     // n.endRendering();
-//                    gameOver = true;
+                    gameOver = true;
                     //goes to score screen later
                 }
             }
@@ -250,16 +246,16 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     public void keyTyped(final KeyEvent event) {
 
         if (event.getKeyChar() == KeyEvent.VK_SPACE) {
-            if (flag == 0) {
+            if (flag == -1 || flag == 0) {
                 flag = 1;
-            } else {
+            } else if (flag == 1) {
                 flag = 0;
             }
         }
         if (event.getKeyChar() == KeyEvent.VK_ESCAPE) {
             paused = !paused;
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -275,9 +271,9 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if ( flag == 0) {
+        if (flag == -1 || flag == 0) {
             flag = 1;
-        } else  {
+        } else if (flag == 1) {
             flag = 0;
         }
 
