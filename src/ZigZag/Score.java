@@ -29,7 +29,7 @@ public class Score {
 
     public void updateScore(float ballSpeed) {
         if (currentSessionScore == 0) // the ball has not yet crashed
-            currentScore += ballSpeed / 20;
+            currentScore += ballSpeed / 70;
 
     }
 

@@ -1,4 +1,5 @@
 package ZigZag;
+
 import Texture.TextureReader;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
@@ -14,7 +15,6 @@ import java.awt.event.*;
 import java.io.IOException;
 
 /**
- *
  * @author moham
  */
 public class Start extends javax.swing.JFrame implements ActionListener {
@@ -113,10 +113,8 @@ public class Start extends javax.swing.JFrame implements ActionListener {
     }
 
 
-
-
     private void jButton1ActionPerformed(ActionEvent evt) {
-     //   new ZigZag();
+        //   new ZigZag();
     }
 
   /*  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -130,6 +128,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 //        new Second().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 */
+
     /**
      * @param args the command line arguments
      */
@@ -153,7 +152,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
     }
     // End of variables declaration//GEN-END:variables
 
-    public static class StartGlEventListener implements GLEventListener, MouseListener, KeyListener {
+    public class StartGlEventListener implements GLEventListener, MouseListener, KeyListener {
 
         int maxWidth = 700;
         int maxHeight = 1000;
@@ -179,8 +178,8 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             if (mouseX > -90 && mouseX < 90 && mouseY > -70 && mouseY < 70)
                 //System.out.println("Test");
                 new ChoseLevel();
-                dispose();
-           //glc.repaint();
+            dispose();
+            //glc.repaint();
         }
 
         @Override
@@ -247,7 +246,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             DrawBackground(gl);
 
             gl.glPushMatrix();
-            DrawBotton(gl,0,0,600,400,1);
+            DrawBotton(gl, 0, 0, 600, 400, 1);
             gl.glPopMatrix();
 
 
@@ -255,6 +254,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
 
         }
+
         public void DrawBackground(GL gl) {
             gl.glEnable(GL.GL_BLEND);
             gl.glBindTexture(GL.GL_TEXTURE_2D, textures[0]);    // Turn Blending On
@@ -278,10 +278,9 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             gl.glDisable(GL.GL_BLEND);
         }
 
-        public void DrawBotton(GL gl,int x ,int y ,int width ,int height , int index){
+        public void DrawBotton(GL gl, int x, int y, int width, int height, int index) {
             gl.glEnable(GL.GL_BLEND);
             gl.glBindTexture(GL.GL_TEXTURE_2D, textures[index]);    // Turn Blending On
-
 
 
 //        gl.glColor3f(0, 0.5f, 0.5f);
@@ -304,6 +303,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
             gl.glDisable(GL.GL_BLEND);
         }
+
         @Override
         public void reshape(GLAutoDrawable glAutoDrawable, int i, int i1, int i2, int i3) {
 
@@ -333,4 +333,4 @@ public class Start extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    }
+}

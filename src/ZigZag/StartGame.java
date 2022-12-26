@@ -6,13 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class StartGame extends JFrame implements ActionListener {
 
     public StartGame(){
 
         setLayout(null);
-        JLabel label1 =new JLabel(new ImageIcon(getClass().getResource("/Assets/background.png")));
+        JLabel label1 =new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/background.png"))));
         label1.setBounds(0,0,700,700);
 
         JLabel label =new JLabel("ZigZag");
@@ -51,13 +52,7 @@ public class StartGame extends JFrame implements ActionListener {
         setFocusable(true);
     }
 
-    public void Play() {
-        // TODO add your handling code here:
-       // new ZigZag().setVisible(true);
-
-    }
-
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -91,7 +91,10 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             createMap();
             drawMap(gl);
             drawBall(gl, xBall, yBall, 50, 50, 1);
-            score.updateScore((float) speed);
+            if (flag == 1 || flag == 0) {
+                score.updateScore((float) speed);
+            }
+
         }
         if (gameOver) {
             score.storeSessionScore();
@@ -121,26 +124,50 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             tileType = 1;
         }
 
-        if (x < -250) {
-            tileType = 1;
-            x += 70;
-            y += 69 - speed;
-
-        } else if (x > 250) {
-            tileType = 0;
-            x -= 70;
-            y += 69 - speed;
-
-        } else if (x >= -250 && x < 250) {
-            if (tileType == 1) {
+        if (flag == 1 || flag == 0) {
+            if (x < -250) {
+                tileType = 1;
                 x += 70;
+                y += 69 - speed;
 
-            } else {
+            } else if (x > 250) {
+                tileType = 0;
                 x -= 70;
+                y += 69 - speed;
 
+            } else if (x >= -250 && x < 250) {
+                if (tileType == 1) {
+                    x += 70;
+
+                } else {
+                    x -= 70;
+
+                }
+                y += 69 - speed;
             }
-            y += 69 - speed;
+        } else {
+            if (x < -250) {
+                tileType = 1;
+                x += 70;
+                y += 69;
+
+            } else if (x > 250) {
+                tileType = 0;
+                x -= 70;
+                y += 69;
+
+            } else if (x >= -250 && x < 250) {
+                if (tileType == 1) {
+                    x += 70;
+
+                } else {
+                    x -= 70;
+
+                }
+                y += 69;
+            }
         }
+
     }
 
     public void drawMap(GL gl) {
