@@ -3,13 +3,13 @@ package ZigZag;
 
 import com.sun.opengl.util.*;
 
+import java.awt.*;
 import javax.media.opengl.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class ZigZag extends JFrame {
 
-    public static void m() {
+    public static void main(String[] args) {
         new ZigZag();
     }
 
@@ -20,7 +20,6 @@ public class ZigZag extends JFrame {
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
-        glcanvas.addKeyListener(listener);
         glcanvas.addMouseListener(listener);
         listener.setCanvas(glcanvas);
 
