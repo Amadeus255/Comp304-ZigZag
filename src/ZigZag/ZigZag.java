@@ -1,6 +1,7 @@
 package ZigZag;
 
 
+import Score.Score;
 import com.sun.opengl.util.*;
 
 import java.awt.*;
@@ -14,7 +15,6 @@ public class ZigZag extends JFrame {
     public ZigZag() {
         GLCanvas glcanvas;
         Animator animator;
-
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);

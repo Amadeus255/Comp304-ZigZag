@@ -20,7 +20,7 @@ import java.util.*;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
-    static Score score = new Score();
+    public static Score score = new Score();
     GameOver gameover=new GameOver();
     boolean paused = false;
     int maxWidth = 700;
@@ -33,7 +33,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     int frame = 0;
     double x = 0;
     double y = 0;
-    double speed = 5;
+    double speed = 3;
     double xBall = -70;
     double yBall = -70;
     TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
