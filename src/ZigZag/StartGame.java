@@ -13,21 +13,22 @@ public class StartGame extends JFrame implements ActionListener {
 
         setLayout(null);
         JLabel label1 =new JLabel(new ImageIcon(getClass().getResource("/Assets/background.png")));
-        label1.setBounds(0,0,850,450);
+        label1.setBounds(0,0,700,700);
 
         JLabel label =new JLabel("ZigZag");
         label.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        label.setBounds(350,20,200,50);
+        label.setBounds(270,200,200,50);
 
 
         JLabel button = new JLabel("Start Game");
         button.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        button.setBounds(300,200,300,100);
+        button.setBounds(230,350,300,100);
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //super.mouseClicked(e);
                 new ChoseLevel().setVisible(true);;
+                dispose();
             }
         });
 
@@ -44,7 +45,7 @@ public class StartGame extends JFrame implements ActionListener {
         setTitle("Start Game");
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850 ,450);
+        setSize(700 ,1000);
         setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);

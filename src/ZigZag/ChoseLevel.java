@@ -21,8 +21,8 @@ public class ChoseLevel extends JFrame implements ActionListener {
     public ChoseLevel() {
 
         setLayout(null);
-        JLabel label1 = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/background.png"))));
-        label1.setBounds(0, 0, 850, 450);
+        JLabel label1 =new JLabel(new ImageIcon(getClass().getResource("/Assets/background.png")));
+        label1.setBounds(0,0,700,700);
 
         setTitle("Start Game");
         //getContentPane().setBackground(Color.WHITE);
@@ -34,8 +34,8 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
         JButton button1 = new JButton("Easy");
         button1.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        button1.setSize(200, 100);
-        button1.setLocation(250, 100);
+        button1.setSize(200,50);
+        button1.setLocation(250,200);
         button1.addActionListener(this::Play);
         button1.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(button1);
@@ -43,16 +43,16 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
         JButton button2 = new JButton("Medium");
         button2.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        button2.setSize(200, 100);
-        button2.setLocation(250, 300);
+        button2.setSize(200,50);
+        button2.setLocation(250,300);
         button2.addActionListener(this::PlayMedium);
         button2.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, 0)));
 
         JButton button3 = new JButton("Hard");
         button3.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
-        button3.setSize(200, 100);
-        button3.setLocation(250, 500);
+        button3.setSize(200,50);
+        button3.setLocation(250,400);
         button3.addActionListener(this::PlayHard);
         button3.setAlignmentX(Component.CENTER_ALIGNMENT);
         //add(Box.createRigidArea(new Dimension(0, -10)));

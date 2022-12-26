@@ -179,7 +179,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             if (mouseX > -90 && mouseX < 90 && mouseY > -70 && mouseY < 70)
                 //System.out.println("Test");
                 new ChoseLevel();
-
+                dispose();
            //glc.repaint();
         }
 
