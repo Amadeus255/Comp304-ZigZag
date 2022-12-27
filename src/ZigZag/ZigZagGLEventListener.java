@@ -2,7 +2,6 @@ package ZigZag;
 
 
 import Texture.TextureReader;
-import com.sun.opengl.util.j2d.TextRenderer;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -10,7 +9,6 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -35,7 +33,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     double speed = 3;
     double xBall = -70;
     double yBall = -70;
-    TextRenderer n = new TextRenderer(Font.decode("PLAIN"));
 
 
     ArrayList<Tile> tiles = new ArrayList<>();
@@ -71,7 +68,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
                         texture[i].getPixels() // Imagedata
                 );
             } catch (IOException e) {
-                System.out.println(e);
                 e.printStackTrace();
             }
         }
@@ -87,7 +83,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         if (paused) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -98,7 +94,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             if (flag == 1 || flag == 0) {
                 score.updateScore((float) speed);
             }
-
+            levelCounter++;
         }
         if (gameOver) {
             score.storeSessionScore();
@@ -106,7 +102,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             ChoseLevel.zigzag.setVisible(false);
         }
 
-        levelCounter++;
+
         if (levelCounter % 100 == 0) {
             levelCounter = 0;
             speed += 0.25;
@@ -289,7 +285,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
         if (event.getKeyChar() == KeyEvent.VK_ESCAPE) {
             paused = !paused;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
