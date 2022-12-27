@@ -82,7 +82,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     }
 
     public void display(GLAutoDrawable gld) {
-        ShowCurrentScore.setText("score:"+(int)score.getCurrentScore());
+        ShowCurrentScore.setText("Score: "+(int)score.getCurrentScore());
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         if (paused) {
