@@ -50,9 +50,7 @@ public class Score {
     }
 
     public void readHighScore() {
-        try {
-            FileReader reader = new FileReader("res/score/highScore.txt");
-            char[] score = new char[5];
+        try (FileReader reader = new FileReader("res/score/highScore.txt")){
             char r;
             StringBuilder builder = new StringBuilder();
 
