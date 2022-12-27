@@ -95,16 +95,19 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             double width = c.getWidth();
             double height = c.getHeight();
 
-            //mouseX = (int) ((x / width) * maxWidth) - maxWidth / 2;
-            //mouseY = maxHeight / 2 - ((int) ((y / height) * maxHeight));
-            System.out.println(x + " and" + y);
+            mouseX = (int) ((x / width) * maxWidth);
+            mouseY = ((int) ((y / height) * maxHeight));
+            mouseY = maxHeight - mouseY;
 
-            if (x > 205 && x < 478 && y > 321 && y < 412) {
+//            mouseX = (int) ((x / width) * maxWidth) - maxWidth / 2;
+//            mouseY = maxHeight / 2 - ((int) ((y / height) * maxHeight));
+            System.out.println("x: " +mouseX + " and y: " + mouseY);
+
+            if (mouseY > 204 && mouseX < 495 && mouseY > 417 && mouseY < 579) {
                 new ChoseLevel();
                 dispose();
             }
-            else
-            if( x > 532 && x < 640 && y > 586 && y < 677){
+            else if( mouseX > 538 && mouseX < 660 && mouseY > 105 && mouseY < 222){
                 new Help();
             }
             //glc.repaint();
