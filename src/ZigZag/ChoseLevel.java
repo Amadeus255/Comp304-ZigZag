@@ -19,16 +19,15 @@ public class ChoseLevel extends JFrame implements ActionListener {
         Image img4 = icon4.getImage();
         Image newimg4 = img4.getScaledInstance(700, 1000, Image.SCALE_SMOOTH);
         label1.setIcon(new ImageIcon(newimg4));
-        label1.setBounds(0, 0, 700, 1000);
+        label1.setBounds(0, 0, 700, 800);
 
         setTitle("Start Game");
-        //getContentPane().setBackground(Color.orange);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 1000);
+        setSize(700, 800);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        //setFocusable(true);
+
 
         JButton button1 = new JButton();
         button1.setSize(200, 50);
@@ -59,7 +58,6 @@ public class ChoseLevel extends JFrame implements ActionListener {
         button2.setIcon(new ImageIcon(newimg2));
         button2.addActionListener(this::PlayMedium);
         button2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //add(Box.createRigidArea(new Dimension(0, 0)));
 
         JButton button3 = new JButton();
         button3.setSize(200, 50);
@@ -74,10 +72,8 @@ public class ChoseLevel extends JFrame implements ActionListener {
         button3.setIcon(new ImageIcon(newimg3));
         button3.addActionListener(this::PlayHard);
         button3.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //add(Box.createRigidArea(new Dimension(0, -10)));
 
 
-        //add(button1);
         add(button2);
         add(button3);
         add(label1);
@@ -114,7 +110,4 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        new ChoseLevel().setVisible(true);
-    }
 }

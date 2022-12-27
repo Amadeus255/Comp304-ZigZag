@@ -133,9 +133,6 @@ public class Help extends JFrame implements ActionListener {
 
 
     }
-    public static void main(String[] args) {
-        new Help().setVisible(true);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

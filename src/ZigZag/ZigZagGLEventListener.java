@@ -5,7 +5,6 @@ import Texture.TextureReader;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
@@ -14,7 +13,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Random;
 
 public class ZigZagGLEventListener implements GLEventListener, MouseListener, KeyListener {
 
@@ -78,7 +79,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
     }
 
     public void display(GLAutoDrawable gld) {
-        ShowCurrentScore.setText("Score: "+(int)score.getCurrentScore());
+        ShowCurrentScore.setText("Score: " + (int) score.getCurrentScore());
         GL gl = gld.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         if (paused) {
@@ -190,14 +191,7 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
             }
         }
 
-
-        Iterator<Tile> itr = tiles.iterator();
-        while (itr.hasNext()) {
-            Tile b = itr.next();
-            if (b.invisible) {
-                itr.remove();
-            }
-        }
+        tiles.removeIf(b -> b.invisible);
 
     }
 
@@ -293,11 +287,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
     }
 
-    public boolean isKeyPressed(final int keyCode) {
-        return keyBits.get(keyCode);
-    }
-
-
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -329,6 +318,6 @@ public class ZigZagGLEventListener implements GLEventListener, MouseListener, Ke
 
     }
 
-    void setCanvas(GLCanvas glcanvas) {
+    void setCanvas() {
     }
 }

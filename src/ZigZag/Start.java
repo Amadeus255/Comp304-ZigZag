@@ -28,7 +28,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
         glcanvas.addGLEventListener(listener);
         glcanvas.addMouseListener(listener);
         glcanvas.addKeyListener(listener);
-        listener.setCanvas(glcanvas);
+        listener.setCanvas();
 
         add(glcanvas, BorderLayout.CENTER);
 
@@ -43,14 +43,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
     }
 
 
-    @SuppressWarnings("unchecked")
-
-
-    /**
-     * @param args the command line arguments
-     */
-
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -151,7 +144,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
                 }
             }
             gl.glLoadIdentity();
-            gl.glOrtho(-350, 350, -500, 500, -1, 1);
+            gl.glOrtho(-maxWidth / 2.0, maxWidth / 2.0, -maxHeight / 2.0, maxHeight / 2.0, -1, 1);
 
         }
 
@@ -208,7 +201,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 //        gl.glColor3f(0, 0.5f, 0.5f);
             gl.glPushMatrix();
             gl.glTranslated(x, y, 0);
-            gl.glScaled(width / 4, height / 4, 1);
+            gl.glScaled(width / 4.0, height / 4.0, 1);
             //gl.glScaled(400, 400, 1);
             gl.glBegin(GL.GL_QUADS);
             // Front Face
@@ -236,7 +229,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
         }
 
-        public void setCanvas(GLCanvas glcanvas) {
+        public void setCanvas() {
         }
 
         @Override

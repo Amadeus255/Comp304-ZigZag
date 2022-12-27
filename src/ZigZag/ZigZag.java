@@ -7,8 +7,6 @@ import java.awt.*;
 import javax.media.opengl.*;
 import javax.swing.*;
 
-import static java.awt.Transparency.TRANSLUCENT;
-
 public class ZigZag extends JFrame {
 
     public ZigZag(int speed) {
@@ -25,7 +23,7 @@ public class ZigZag extends JFrame {
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
         glcanvas.addMouseListener(listener);
-        listener.setCanvas(glcanvas);
+        listener.setCanvas();
         listener.speed = speed;
         add(glcanvas, BorderLayout.CENTER);
         animator = new FPSAnimator(30);

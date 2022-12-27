@@ -1,7 +1,5 @@
 package ZigZag;
 
-import Texture.TextureReader;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -94,7 +92,7 @@ public class GameOver extends JFrame implements ActionListener {
         scorei.setCurrentSessionScore(0);
         scorei.setCurrentScore(0);
         ChoseLevel.zigzag.dispose();
-        ChoseLevel c = new ChoseLevel();
+        new ChoseLevel();
 
 
     }
