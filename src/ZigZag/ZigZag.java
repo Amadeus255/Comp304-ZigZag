@@ -4,12 +4,27 @@ package ZigZag;
 import com.sun.opengl.util.*;
 
 import java.awt.*;
+import java.io.File;
 import javax.media.opengl.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 public class ZigZag extends JFrame {
 
     public ZigZag(int speed) {
+        try {
+            String soundName = "/Assets/sound.wav";
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(soundName));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }
+
 
         GLCanvas glcanvas;
         Animator animator;
@@ -37,5 +52,6 @@ public class ZigZag extends JFrame {
         setVisible(true);
         setFocusable(true);
         glcanvas.requestFocus();
+
     }
 }
