@@ -32,7 +32,7 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
         JButton button1 = new JButton();
         button1.setSize(200, 50);
-        button1.setLocation(250, 200);
+        button1.setLocation(250, 220);
         ImageIcon icon1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/Easy_Button.png")));
         Image img1 = icon1.getImage();
         Image newimg1 = img1.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
@@ -48,7 +48,7 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
         JButton button2 = new JButton();
         button2.setSize(200, 50);
-        button2.setLocation(250, 300);
+        button2.setLocation(250, 333);
         ImageIcon icon2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/Normal_Button.png")));
         Image img2 = icon2.getImage();
         Image newimg2 = img2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
@@ -63,7 +63,7 @@ public class ChoseLevel extends JFrame implements ActionListener {
 
         JButton button3 = new JButton();
         button3.setSize(200, 50);
-        button3.setLocation(250, 400);
+        button3.setLocation(250, 446);
         ImageIcon icon3 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/Hard_Button.png")));
         Image img3 = icon3.getImage();
         Image newimg3 = img3.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
