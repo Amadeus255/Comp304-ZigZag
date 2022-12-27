@@ -1,8 +1,6 @@
 package ZigZag;
 
 import Texture.TextureReader;
-import com.sun.opengl.util.Animator;
-import com.sun.opengl.util.FPSAnimator;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -23,10 +21,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
      * Creates new form NewJFrame1
      */
     public Start() {
-
-        //setSize(800,800);
         GLCanvas glcanvas;
-        //Animator animator;
 
         StartGlEventListener listener = new StartGlEventListener();
         glcanvas = new GLCanvas();
@@ -37,9 +32,6 @@ public class Start extends javax.swing.JFrame implements ActionListener {
 
         add(glcanvas, BorderLayout.CENTER);
 
-        //animator = new FPSAnimator(60);
-        //animator.add(glcanvas);
-        //animator.start();
 
         setTitle("ZigZag");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,6 +49,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String args[]) {
 
         /* Create and display the form */
@@ -80,7 +73,7 @@ public class Start extends javax.swing.JFrame implements ActionListener {
         int maxWidth = 700;
         int maxHeight = 1000;
 
-        String[] textureNames = {"background.png", "Play.png","help.png"};
+        String[] textureNames = {"background.png", "Play.png", "help.png"};
         TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
         int[] textures = new int[textureNames.length];
 
@@ -99,15 +92,10 @@ public class Start extends javax.swing.JFrame implements ActionListener {
             mouseY = ((int) ((y / height) * maxHeight));
             mouseY = maxHeight - mouseY;
 
-//            mouseX = (int) ((x / width) * maxWidth) - maxWidth / 2;
-//            mouseY = maxHeight / 2 - ((int) ((y / height) * maxHeight));
-            System.out.println("x: " +mouseX + " and y: " + mouseY);
-
             if (mouseY > 204 && mouseX < 495 && mouseY > 417 && mouseY < 579) {
                 new ChoseLevel();
                 dispose();
-            }
-            else if( mouseX > 538 && mouseX < 660 && mouseY > 105 && mouseY < 222){
+            } else if (mouseX > 538 && mouseX < 660 && mouseY > 105 && mouseY < 222) {
                 new Help();
             }
             //glc.repaint();
