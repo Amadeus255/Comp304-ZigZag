@@ -14,13 +14,15 @@ public class ChoseLevel extends JFrame implements ActionListener {
     public ChoseLevel() {
 
         setLayout(null);
-        JLabel label1 = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Assets/background.png"))));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/Assets/background.png")).getImage().getScaledInstance(700, 700, Image.SCALE_DEFAULT));
+        JLabel label1 = new JLabel(imageIcon);
         label1.setBounds(0, 0, 700, 700);
 
         setTitle("Start Game");
-        //getContentPane().setBackground(Color.WHITE);
+        //getContentPane().setBackground(Color.orange);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 1000);
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
         //setFocusable(true);
