@@ -17,11 +17,11 @@ public class GameOver extends JFrame implements ActionListener {
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         score = new JLabel();
-        score.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
+        score.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 30));
         user = new JTextField();
         user.setMaximumSize(new Dimension(400, 600));
         highScore = new JLabel();
-        highScore.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 40));
+        highScore.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 30));
         name = new JLabel("Enter Your Name");
         name.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 30));
         //ok button

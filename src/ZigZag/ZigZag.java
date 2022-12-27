@@ -16,9 +16,12 @@ public class ZigZag extends JFrame {
         GLCanvas glcanvas;
         Animator animator;
         ZigZagGLEventListener listener = new ZigZagGLEventListener();
-        listener.ShowCurrentScore.setMaximumSize(new Dimension(25,20));
-        listener.ShowCurrentScore.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 11));
-        add(listener.ShowCurrentScore,BorderLayout.NORTH);
+        listener.ShowCurrentScore.setBounds(5,5,100,20);
+        listener.ShowCurrentScore.setMaximumSize(new Dimension(45,50));
+        listener.ShowCurrentScore.setFont(new java.awt.Font("Calligrapher", Font.BOLD, 19));
+        //making showCurrentScore transparent
+
+        add(listener.ShowCurrentScore);
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
@@ -34,7 +37,6 @@ public class ZigZag extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 1000);
         setLocationRelativeTo(null);
-        setBackground(Color.WHITE);
         setVisible(true);
         setFocusable(true);
         glcanvas.requestFocus();
